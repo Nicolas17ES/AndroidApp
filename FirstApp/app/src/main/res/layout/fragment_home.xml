@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"
+    tools:context=".bottomNavFragments.HomeFragment"
     android:background="@color/white"
     android:layout_above="@+id/bottomNavigationView"
     android:layout_marginBottom="81dp"

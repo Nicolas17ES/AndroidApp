@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/animalImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_home"
+            android:layout_marginLeft="5dp"/>
+
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_below="@id/animalImage"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_open" />
+
+        <TextView
+            android:id="@+id/locationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animalImage"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/locationIcon"
+
+            android:text="See more"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/animalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="35dp"
+            android:layout_toEndOf="@id/animalImage"
+            android:layout_toRightOf="@+id/animalImage"
+            android:text="Johny"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/animalType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/animalName"
+            android:layout_marginLeft="35dp"
+
+            android:layout_toEndOf="@id/animalImage"
+            android:text="Dog"
+            android:textColor="@color/green"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/animalDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/animalType"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/animalImage"
+            android:text="Very peacuful dog with blue eyes"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

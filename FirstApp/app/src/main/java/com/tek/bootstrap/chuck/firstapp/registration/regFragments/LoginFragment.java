@@ -1,4 +1,4 @@
-package com.tek.bootstrap.chuck.firstapp;
+package com.tek.bootstrap.chuck.firstapp.registration.regFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.tek.bootstrap.chuck.firstapp.MainActivity;
+import com.tek.bootstrap.chuck.firstapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,15 +31,10 @@ import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignUpFragment#newInstance} factory method to
+ * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignUpFragment extends Fragment {
-    TextInputEditText textInputEditTextName, textInputEditTextUsername, textInputEditTextPassword, textInputEditTextEmail;
-    Button buttonSignUp;
-    TextView textViewLogin;
-    ProgressBar progressBar;
-    TextView DisplayText;
+public class LoginFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,7 +45,11 @@ public class SignUpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SignUpFragment() {
+    TextInputEditText textInputEditTextPassword, textInputEditTextEmail;
+    Button buttonLogIn;
+    TextView textViewSignUp;
+
+    public LoginFragment() {
         // Required empty public constructor
     }
 
@@ -59,11 +59,11 @@ public class SignUpFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpFragment.
+     * @return A new instance of fragment LoginFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignUpFragment newInstance(String param1, String param2) {
-        SignUpFragment fragment = new SignUpFragment();
+    public static LoginFragment newInstance(String param1, String param2) {
+        LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,41 +78,35 @@ public class SignUpFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        final String url = "http://192.168.1.98:3001/auth/register";
+        final String url = "http://192.168.1.98:3001/auth/login";
 
-        textInputEditTextName = getView().findViewById(R.id.fullname);
-        textInputEditTextUsername = getView().findViewById(R.id.username);
         textInputEditTextEmail = getView().findViewById(R.id.email);
         textInputEditTextPassword = getView().findViewById(R.id.password);
-        buttonSignUp = getView().findViewById(R.id.buttonSignUp);
-        textViewLogin = getView().findViewById(R.id.loginText);
-        progressBar = getView().findViewById(R.id.progress);
-
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+        buttonLogIn = getView().findViewById(R.id.btnLogin);
+        textViewSignUp = getView().findViewById(R.id.signUpText);
+        buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name, username, password, email;
-                name = String.valueOf(textInputEditTextName.getText());
-                username = String.valueOf(textInputEditTextUsername.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
 
                 HashMap<String, String> params = new HashMap<String,String>();
 
-                params.put("name", name);
-                params.put("username", username);
                 params.put("email", email);
                 params.put("password", password);
                 JsonObjectRequest jsObjRequest = new
@@ -122,13 +116,11 @@ public class SignUpFragment extends Fragment {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                String id = null;
                                 try {
-                                    id = response.getString("user_id");
+                                    String id = response.getString("user_id");
                                     Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
                                     intent.putExtra("user_id", id);
                                     startActivity(intent);
-
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -139,22 +131,21 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        DisplayText.setText("Error in credentials");
-                        Log.d("dev", "doesnt works");
+                        Log.d("dev", "doesn't works");
                     }
                 });
                 queue.add(jsObjRequest);
             }
         });
 
-        TextView button = (TextView) view.findViewById(R.id.loginText);
+        TextView button = (TextView) view.findViewById(R.id.signUpText);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, new LoginFragment());
+                fragmentTransaction.replace(R.id.fragmentContainer, new SignUpFragment());
                 fragmentTransaction.commit();
             }
         });

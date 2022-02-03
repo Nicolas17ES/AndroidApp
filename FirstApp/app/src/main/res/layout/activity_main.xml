@@ -38,11 +38,5 @@
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/bottomAppBar" />
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="TextView" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

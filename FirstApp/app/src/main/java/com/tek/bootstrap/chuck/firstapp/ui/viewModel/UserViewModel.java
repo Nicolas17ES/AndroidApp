@@ -17,12 +17,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UserViewModel extends ViewModel {
 
     public int user_id;
-    public MutableLiveData<String> name = new MutableLiveData<>();
+    public MutableLiveData<User> user = new MutableLiveData<>();
     public String email;
 
     public void getUser(String id){
 
-        name.setValue("");
+        //name.setValue("");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.98:3001/")
@@ -41,10 +41,7 @@ public class UserViewModel extends ViewModel {
                 }
                 User authUser = response.body();
                 Log.d("devErrors", "User" + authUser.getName());
-                user_id = authUser.getUser_id();
-                name.setValue(authUser.getName());
-
-                email = authUser.getEmail();
+                user.setValue(authUser);
 
             }
 
