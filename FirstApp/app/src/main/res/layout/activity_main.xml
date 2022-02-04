@@ -9,6 +9,22 @@
     tools:context=".MainActivity"
     >
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -36,7 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:layout_anchor="@id/bottomAppBar" />
+        app:layout_anchor="@id/bottomAppBar"
+        android:backgroundTint="@color/green"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,11 +2,17 @@ package com.tek.bootstrap.chuck.firstapp.bottomNavFragments;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,6 +22,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tek.bootstrap.chuck.firstapp.R;
@@ -26,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private Toolbar mToolbar;
     private GoogleMap mMap;
     DogViewModel dogViewModel;
     List<Dog> dogsList;
@@ -38,7 +47,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -70,6 +81,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     String snippet = dog.getDescription();
 
                     marker =  new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_dog))
                             .position(new LatLng(lat, lng))
                             .title(title)
                             .snippet(snippet);
@@ -88,6 +101,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(41.390205, 2.154007), 12), 1500, null);
         }
+    }
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
 }

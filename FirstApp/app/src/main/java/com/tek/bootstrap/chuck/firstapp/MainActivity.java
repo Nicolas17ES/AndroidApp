@@ -2,12 +2,14 @@ package com.tek.bootstrap.chuck.firstapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ import com.tek.bootstrap.chuck.firstapp.ui.model.User;
 import com.tek.bootstrap.chuck.firstapp.ui.viewModel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
+    private Toolbar mToolbar;
     BottomNavigationView bottomNavigationView;
     UserViewModel userViewModel;
     String id;
@@ -35,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
 
         if(getIntent().getExtras() != null){
             id = getIntent().getExtras().getString("user_id");
-        } else{
-            id;
         }
 
 
@@ -109,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.top_menu, menu);
+        return true;
     }
 }
 

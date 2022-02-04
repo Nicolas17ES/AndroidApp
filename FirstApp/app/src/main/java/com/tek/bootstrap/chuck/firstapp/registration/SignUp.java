@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tek.bootstrap.chuck.firstapp.R;
+import com.tek.bootstrap.chuck.firstapp.registration.regFragments.LoginFragment;
 import com.tek.bootstrap.chuck.firstapp.registration.regFragments.SignUpFragment;
 
 public class SignUp extends AppCompatActivity {
@@ -26,13 +27,13 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        SignUpFragment signUpFragment = new SignUpFragment();
-        fragmentTransaction.add(R.id.fragmentContainer, signUpFragment);
+        LoginFragment loginFragment = new LoginFragment();
+        fragmentTransaction.add(R.id.fragmentContainer, loginFragment);
         fragmentTransaction.commit();
 
     }
