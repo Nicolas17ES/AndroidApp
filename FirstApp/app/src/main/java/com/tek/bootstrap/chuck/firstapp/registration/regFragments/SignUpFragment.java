@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +42,7 @@ public class SignUpFragment extends Fragment {
     TextView textViewLogin;
     ProgressBar progressBar;
     TextView DisplayText;
+    TextView display;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -102,6 +104,7 @@ public class SignUpFragment extends Fragment {
         buttonSignUp = getView().findViewById(R.id.buttonSignUp);
         textViewLogin = getView().findViewById(R.id.loginText);
         progressBar = getView().findViewById(R.id.progress);
+        display = getView().findViewById(R.id.displayAlert);
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,41 +115,48 @@ public class SignUpFragment extends Fragment {
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
 
-                HashMap<String, String> params = new HashMap<String,String>();
+                if(name.matches("") || username.matches("") || email.matches("") || password.matches("")){
+                    display.setText("Please fill in all the information");
+                } else {
+                    HashMap<String, String> params = new HashMap<String,String>();
 
-                params.put("name", name);
-                params.put("username", username);
-                params.put("email", email);
-                params.put("password", password);
-                JsonObjectRequest jsObjRequest = new
-                        JsonObjectRequest(Request.Method.POST,
-                        url,
-                        new JSONObject(params),
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                String id = null;
-                                try {
-                                    id = response.getString("user_id");
-                                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                                    intent.putExtra("user_id", id);
-                                    startActivity(intent);
+                    params.put("name", name);
+                    params.put("username", username);
+                    params.put("email", email);
+                    params.put("password", password);
+                    JsonObjectRequest jsObjRequest = new
+                            JsonObjectRequest(Request.Method.POST,
+                            url,
+                            new JSONObject(params),
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    String id = null;
+                                    try {
+                                        id = response.getString("user_id");
+                                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                                        intent.putExtra("user_id", id);
+                                        startActivity(intent);
+                                        Toast toast = Toast.makeText(getActivity(),"Succesfully registered",Toast. LENGTH_SHORT);
+                                        toast.setMargin(50,50);
+                                        toast.show();
 
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
-
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        DisplayText.setText("Error in credentials");
-                        Log.d("dev", "doesnt works");
-                    }
-                });
-                queue.add(jsObjRequest);
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                            display.setText("Error in credentials");
+                            Log.d("dev", "doesnt works");
+                        }
+                    });
+                    queue.add(jsObjRequest);
+                }
             }
         });
 

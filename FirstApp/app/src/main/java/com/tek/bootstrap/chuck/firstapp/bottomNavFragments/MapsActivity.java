@@ -49,6 +49,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
         mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -86,14 +87,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             .position(new LatLng(lat, lng))
                             .title(title)
                             .snippet(snippet);
-                    Log.d("devErrors", "markers are: " + marker);
                     mMap.addMarker(marker);
                 }
             }
         });
-
-
-        Log.d("devErrors", "maps data is: " + ll);
 
         if (i != null && ll != null)
         {

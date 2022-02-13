@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,6 +49,7 @@ public class LoginFragment extends Fragment {
     TextInputEditText textInputEditTextPassword, textInputEditTextEmail;
     Button buttonLogIn;
     TextView textViewSignUp;
+    TextView display;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -98,43 +100,52 @@ public class LoginFragment extends Fragment {
         textInputEditTextPassword = getView().findViewById(R.id.password);
         buttonLogIn = getView().findViewById(R.id.btnLogin);
         textViewSignUp = getView().findViewById(R.id.signUpText);
+        display = getView().findViewById(R.id.displayAlert);
+
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name, username, password, email;
+                String password, email;
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
 
-                HashMap<String, String> params = new HashMap<String,String>();
+                if(email.matches("") || password.matches("")){
+                    display.setText("Please fill in all the information");
+                } else {
+                    HashMap<String, String> params = new HashMap<String,String>();
 
-                params.put("email", email);
-                params.put("password", password);
-                JsonObjectRequest jsObjRequest = new
-                        JsonObjectRequest(Request.Method.POST,
-                        url,
-                        new JSONObject(params),
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    String id = response.getString("user_id");
-                                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                                    intent.putExtra("user_id", id);
-                                    startActivity(intent);
+                    params.put("email", email);
+                    params.put("password", password);
+                    JsonObjectRequest jsObjRequest = new
+                            JsonObjectRequest(Request.Method.POST,
+                            url,
+                            new JSONObject(params),
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String id = response.getString("user_id");
+                                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                                        intent.putExtra("user_id", id);
+                                        startActivity(intent);
+                                        Toast toast = Toast.makeText(getActivity(),"Succesfully logged in",Toast. LENGTH_SHORT);
+                                        toast.setMargin(50,50);
+                                        toast.show();
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
-
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Log.d("dev", "doesn't works");
-                    }
-                });
-                queue.add(jsObjRequest);
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                            display.setText("Error in credentials");
+                        }
+                    });
+                    queue.add(jsObjRequest);
+                }
             }
         });
 

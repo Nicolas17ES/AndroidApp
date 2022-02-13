@@ -1,5 +1,6 @@
 package com.tek.bootstrap.chuck.firstapp.bottomNavFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.tek.bootstrap.chuck.firstapp.R;
 import com.tek.bootstrap.chuck.firstapp.adapters.AnimalAdapter;
@@ -32,6 +34,7 @@ public class LostAnimalsFragment extends Fragment {
     ArrayList<Dog> listAnimals;
     DogViewModel dogViewModel;
     List<Dog> dogsList;
+    LinearLayout fragment;
 
 
 
@@ -76,6 +79,7 @@ public class LostAnimalsFragment extends Fragment {
         // initialize animals model
         dogViewModel = ViewModelProviders.of(this).get(DogViewModel.class);
         dogViewModel.getDogs();
+
     }
 
     @Override
@@ -83,6 +87,7 @@ public class LostAnimalsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lost_animals, container, false);
+
         recyclerViewAnimals = view.findViewById(R.id.recyclerview);
         listAnimals = new ArrayList<>();
         //load the list
@@ -96,10 +101,6 @@ public class LostAnimalsFragment extends Fragment {
             public void onChanged(List<Dog> dogs) {
                 dogsList = dogViewModel.dogs.getValue();
 
-                for (Dog animal: dogsList){
-                    listAnimals.add(new Dog(animal.getName(), animal.getDescription(), animal.getType(), animal.getBreed(), animal.getCity(), animal.getStreet(), animal.getContactEmail(), animal.getContactPhone(), animal.getImage(), animal.getUser_id()));
-
-                }
                 displayData();
             }
         });
@@ -123,6 +124,7 @@ public class LostAnimalsFragment extends Fragment {
                 String email = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactEmail();
                 int phone = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactPhone();
                 String city = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getCity();
+                String date = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getDate();
                 String image = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getImage();
                 int user_id = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getUser_id();
                 String street = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getStreet();
@@ -139,9 +141,10 @@ public class LostAnimalsFragment extends Fragment {
                 bundle.putString( "email", email);
                 bundle.putInt( "phone", phone);
                 bundle.putString( "city", city);
-                bundle.putString( "image", image);
+                bundle.putString( "date", date);
                 bundle.putInt( "user_id", user_id);
                 bundle.putString( "street", street);
+                bundle.putString( "image", image);
 
                 FullAnimalFragment fullAnimalFragment = new FullAnimalFragment();
                 fullAnimalFragment.setArguments(bundle);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.tek.bootstrap.chuck.firstapp.bottomNavFragments.MapsActivity;
 import com.tek.bootstrap.chuck.firstapp.R;
 
@@ -34,9 +37,10 @@ public class FullAnimalFragment extends Fragment {;
     String email;
     int phone;
     String city;
-    String image;
+    String date;
     int user_id;
     String street;
+    String image;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,9 +91,10 @@ public class FullAnimalFragment extends Fragment {;
         email = (String) args.get("email");
         phone = (int) args.get("phone");
         city = (String) args.get("city");
-        image = (String) args.get("image");
+        date = (String) args.get("date");
         user_id = (int) args.get("user_id");
         street = (String) args.get("street");
+        image = (String) args.get("image");
 
 
     }
@@ -111,18 +116,22 @@ public class FullAnimalFragment extends Fragment {;
 
         TextView name1 = getView().findViewById(R.id.animalName);
         name1.setText(name);
-        TextView type1 = (TextView) getView().findViewById(R.id.animalType);
-        type1.setText(type);
+        //TextView type1 = (TextView) getView().findViewById(R.id.animalType);
+        //        type1.setText(type);
         TextView breed1 = (TextView) getView().findViewById(R.id.animalBreed);
         breed1.setText(breed);
         TextView description1 = (TextView) getView().findViewById(R.id.animalDescription);
         description1.setText(description);
-        TextView email1 = (TextView) getView().findViewById(R.id.animalEmail);
-        email1.setText(email);
+        //TextView email1 = (TextView) getView().findViewById(R.id.animalEmailText);
+        //        email1.setText(email);
         TextView city1 = (TextView) getView().findViewById(R.id.animalCity);
         city1.setText(city);
+        TextView date1 = (TextView) getView().findViewById(R.id.animalDate);
+        date1.setText(date);
         ImageView image1 = (ImageView) getView().findViewById(R.id.animalImage);
-        //
+        String url = "http://192.168.1.98:3001/images/upload_images/" + image;
+        Picasso.get().load(url).placeholder(R.drawable.ic_dog).into(image1);
+
         TextView street1 = (TextView) getView().findViewById(R.id.animalStreet);
         street1.setText(street);
 

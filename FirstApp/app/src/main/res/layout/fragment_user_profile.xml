@@ -9,16 +9,7 @@
     android:layout_marginBottom="125dp"
     android:layout_below="@+id/topBar"
     android:layout_marginTop="78dp">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsbold"
-        android:gravity="center"
-        android:text="Your Lost Animals"
-        android:textColor="@color/green"
-        android:textSize="30sp"
-        tools:targetApi="jelly_bean" />
+
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView

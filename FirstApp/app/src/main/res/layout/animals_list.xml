@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/beige"
+
     >
 
     <RelativeLayout
@@ -16,69 +18,70 @@
 
         <ImageView
             android:id="@+id/animalImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_home"
-            android:layout_marginLeft="5dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_dog" />
 
         <ImageView
             android:id="@+id/locationIcon"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:layout_below="@id/animalImage"
-            android:layout_marginTop="7dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_open" />
 
-        <TextView
-            android:id="@+id/locationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/animalImage"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/locationIcon"
-
-            android:text="See more"
-            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/animalName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="15dp"
             android:layout_toEndOf="@id/animalImage"
             android:layout_toRightOf="@+id/animalImage"
             android:text="Johny"
-            android:textColor="@color/green"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="19sp" />
 
         <TextView
             android:id="@+id/animalType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/animalName"
-            android:layout_marginLeft="35dp"
-
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/animalImage"
             android:text="Dog"
-            android:textColor="@color/green"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/animalDescription"
+            android:id="@+id/animalDateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/animalType"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/animalImage"
+            android:text="Lost on"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/animalDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/animalType"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/animalDateText"
             android:text="Very peacuful dog with blue eyes"
             android:textColor="@color/black"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

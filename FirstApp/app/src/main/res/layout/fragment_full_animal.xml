@@ -8,10 +8,10 @@
     android:layout_above="@+id/bottomNavigationView"
     android:layout_marginBottom="125dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="300dp"
         android:layout_marginBottom="380dp"
         android:orientation="vertical"
         app:cardCornerRadius="10dp"
@@ -20,19 +20,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/green"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/beige">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="185dp"
+            android:layout_height="255dp"
             android:padding="10dp">
 
             <ImageView
                 android:id="@+id/animalImage"
-                android:layout_width="93dp"
-                android:layout_height="110dp"
+                android:layout_width="120dp"
+                android:layout_height="190dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_dog" />
 
             <ImageView
                 android:id="@+id/locationIcon"
@@ -53,7 +56,8 @@
                 android:layout_toEndOf="@+id/locationIcon"
                 android:layout_toRightOf="@id/locationIcon"
                 android:text="Maps Location"
-                android:textSize="11sp" />
+                android:textSize="10sp"
+                android:textColor="@color/greenHard"/>
 
             <TextView
                 android:id="@+id/animalName"
@@ -64,9 +68,9 @@
                 android:layout_toEndOf="@id/animalImage"
                 android:layout_toRightOf="@+id/animalImage"
                 android:text="Johny"
-                android:textColor="@color/green"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textColor="@color/greenHard"
+                android:textSize="17sp"
+                />
 
             <TextView
                 android:id="@+id/animalType"
@@ -75,9 +79,9 @@
                 android:layout_below="@+id/animalName"
                 android:layout_marginLeft="35dp"
                 android:layout_toEndOf="@id/animalImage"
-                android:text="Dog  -"
-                android:textColor="@color/green"
-                android:textSize="18sp" />
+                android:text="Breed:"
+                android:textColor="@color/greenHard"
+                android:textSize="11sp" />
 
 
             <TextView
@@ -85,84 +89,107 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/animalName"
-                android:layout_marginStart="12dp"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginTop="1dp"
                 android:layout_toEndOf="@id/animalType"
                 android:layout_toRightOf="@id/animalType"
                 android:text="Chihuaha"
-                android:textColor="@color/green"
-                android:textSize="18sp" />
+                android:textColor="@color/greenHard"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/lostOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/animalImage"
+                android:layout_below="@+id/animalDescription"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:text="Lost on: "
+                android:textColor="@color/greenHard"
+                android:textSize="10sp"/>
 
             <TextView
                 android:id="@+id/animalCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/animalDescription"
+                android:layout_below="@+id/lostOn"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/animalImage"
-                android:layout_toRightOf="@id/locationText"
                 android:text="Barcelona"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textColor="@color/greenHard"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/animalStreet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/animalDescription"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="-57dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/animalCity"
-                android:layout_toRightOf="@id/animalCity"
+                android:layout_below="@+id/animalCity"
+                android:layout_marginLeft="35dp"
+                android:layout_toRightOf="@id/animalImage"
                 android:text="Major de Sarria"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textColor="@color/greenHard"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/animalDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/animalStreet"
+                android:layout_marginStart="35dp"
+                android:layout_toRightOf="@id/animalImage"
+                android:text="12Th february 2021"
+                android:textColor="@color/greenHard"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/animalEmailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/animalCity"
+                android:layout_below="@+id/animalDate"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="33dp"
-                android:layout_toEndOf="@id/animalImage"
+                android:layout_marginTop="43dp"
                 android:layout_toRightOf="@id/locationText"
-                android:text="If found please contact:"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:text="Contact for more info"
+                android:textColor="@color/greenHard"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_below="@+id/animalDate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="42dp"
+                android:layout_toRightOf="@id/animalEmailText"
+                android:src="@drawable/ic_mail" />
 
             <TextView
-                android:id="@+id/animalEmail"
+                android:id="@+id/descriptionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/animalStreet"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="33dp"
-                android:layout_toEndOf="@id/animalEmailText"
-                android:layout_toRightOf="@id/animalEmailText"
-                android:text="robbie@robbie.com"
-                android:textColor="@color/black"
+                android:layout_below="@+id/animalBreed"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/animalImage"
+                android:text="Description: "
+                android:textColor="@color/greenHard"
                 android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/animalDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/animalType"
+                android:layout_below="@+id/descriptionTitle"
                 android:layout_marginStart="35dp"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="9dp"
                 android:layout_toEndOf="@id/animalImage"
                 android:text="Very peacuful dog with blue eyes"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
+                android:textColor="@color/greenHard"
+                android:textSize="11sp" />
 
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

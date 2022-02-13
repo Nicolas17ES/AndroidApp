@@ -87,7 +87,7 @@ public class DogViewModel extends ViewModel {
 
     }
 
-    public void createLostDog(String name, String description, String type, String breed, String city, String street, String contactEmail, int contactPhone, String image, int user_id){
+    public void createLostDog(String name, String description, String type, String breed, String city, String street, String contactEmail, int contactPhone, String date, int user_id){
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -96,7 +96,7 @@ public class DogViewModel extends ViewModel {
                 .build();
         UserApi userApi = retrofit.create(UserApi.class);
 
-        Dog dog = new Dog( name, description, type, breed, city, street, contactEmail, contactPhone, image, user_id);
+        Dog dog = new Dog( name, description, type, breed, city, street, contactEmail, contactPhone, date, user_id);
 
         Call <Dog> call = userApi.createLostDog(dog);
 
@@ -119,4 +119,6 @@ public class DogViewModel extends ViewModel {
         });
 
     }
+
+
 }

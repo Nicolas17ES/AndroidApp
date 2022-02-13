@@ -1,5 +1,8 @@
 package com.tek.bootstrap.chuck.firstapp.bottomNavFragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,13 +11,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.tek.bootstrap.chuck.firstapp.MainActivity;
 import com.tek.bootstrap.chuck.firstapp.R;
 import com.tek.bootstrap.chuck.firstapp.adapters.AnimalAdapter;
 import com.tek.bootstrap.chuck.firstapp.animalsFragment.FullAnimalFragment;
+import com.tek.bootstrap.chuck.firstapp.registration.SignUp;
 import com.tek.bootstrap.chuck.firstapp.ui.model.Dog;
 import com.tek.bootstrap.chuck.firstapp.ui.viewModel.DogViewModel;
 
@@ -34,6 +41,8 @@ public class UserProfileFragment extends Fragment {
     DogViewModel dogViewModel;
     List<Dog> dogsList;
     int id;
+    String idToChange;
+    SharedPreferences preferences;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -74,13 +83,22 @@ public class UserProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        if(getArguments() != null){
-            id = getArguments().getInt("user_id");
+
+
+        preferences = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        idToChange = preferences.getString("user_id", "null");
+
+        if(idToChange != "null"){
+            id = Integer.parseInt(idToChange);
+            dogViewModel = ViewModelProviders.of(this).get(DogViewModel.class);
+            dogViewModel.getDogsByUserId(String.valueOf(id));
         } else {
-            id = 0;
+            startActivity(new Intent(getActivity(), SignUp.class));
+            Toast toast = Toast. makeText(getActivity(),"LogIn to view your profile",Toast. LENGTH_LONG);
+            toast.setMargin(50,50);
+            toast.show();
+            getActivity().overridePendingTransition(0, 0);
         }
-        dogViewModel = ViewModelProviders.of(this).get(DogViewModel.class);
-        dogViewModel.getDogsByUserId(String.valueOf(id));
     }
 
     @Override
@@ -101,10 +119,10 @@ public class UserProfileFragment extends Fragment {
             public void onChanged(List<Dog> dogs) {
                 dogsList = dogViewModel.userDogs.getValue();
 
-                for (Dog animal: dogsList){
-                    listAnimals.add(new Dog(animal.getName(), animal.getDescription(), animal.getType(), animal.getBreed(), animal.getCity(), animal.getStreet(), animal.getContactEmail(), animal.getContactPhone(), animal.getImage(), animal.getUser_id()));
-
-                }
+               // for (Dog animal: dogsList){
+                //                    listAnimals.add(new Dog(animal.getName(), animal.getDescription(), animal.getType(), animal.getBreed(), animal.getCity(), animal.getStreet(), animal.getContactEmail(), animal.getContactPhone(), animal.getDate(), animal.getImage(), animal.getUser_id()));
+                //
+                //                }
                 displayData();
             }
         });
@@ -155,4 +173,6 @@ public class UserProfileFragment extends Fragment {
         //        });
 
     }
+
+
 }

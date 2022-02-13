@@ -12,11 +12,12 @@ public class Dog {
     private int contactPhone;
     private String city;
     private String street;
+    private String date;
     private String image;
     private int user_id;
     private String color;
 
-    public Dog(String name, String description, String type, String breed, String city, String street, String contactEmail, int contactPhone, String image, int user_id){
+    public Dog(String name, String description, String type, String breed, String city, String street, String contactEmail, int contactPhone, String date, int user_id){
         this.name = name;
         this.description = description;
         this.type = type;
@@ -27,7 +28,8 @@ public class Dog {
         this.contactPhone = contactPhone;
         this.city = city;
         this.street = street;
-        this.image = image;
+        this.date = date;
+       // this.image = image;
         this.user_id = user_id;
     }
     public Dog(){}
@@ -111,6 +113,12 @@ public class Dog {
     public void setContactPhone(int contactPhone) {
         this.contactPhone = contactPhone;
     }
+
+
+
+    public String getDate() { return date; }
+
+    public void setDate(String date) { this.date = date; }
 
 
 
