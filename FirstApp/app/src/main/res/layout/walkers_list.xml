@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="250dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/beige"
+    android:layout_gravity="center"
 
     >
 
@@ -17,12 +18,12 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/animalImage"
+            android:id="@+id/walkerImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="5dp"
             android:foreground="@drawable/rounded_fg"
-            android:src="@drawable/ic_dog" />
+            android:src="@drawable/ic_dog_in_front_of_a_man_svgrepo_com" />
 
         <ImageView
             android:id="@+id/locationIcon"
@@ -36,49 +37,26 @@
 
 
         <TextView
-            android:id="@+id/animalName"
+            android:id="@+id/walkerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_toEndOf="@id/animalImage"
-            android:layout_toRightOf="@+id/animalImage"
+            android:layout_toEndOf="@id/walkerImage"
+            android:layout_toRightOf="@+id/walkerImage"
             android:text="Johny"
             android:textColor="@color/black"
             android:textSize="19sp" />
 
-        <TextView
-            android:id="@+id/animalType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/animalName"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/animalImage"
-            android:text="Dog"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/animalDateText"
+            android:id="@+id/walkerLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/animalType"
+            android:layout_below="@+id/walkerName"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/animalImage"
-            android:text="Lost on"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/animalDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/animalType"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/animalDateText"
-            android:text="Very peacuful dog with blue eyes"
+            android:layout_toEndOf="@id/walkerImage"
+            android:text="Barcelona"
             android:textColor="@color/black"
             android:textSize="12sp" />
 

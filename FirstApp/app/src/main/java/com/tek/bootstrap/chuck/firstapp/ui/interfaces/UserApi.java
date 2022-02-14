@@ -21,6 +21,9 @@ public interface UserApi {
     @GET("auth/userid/{id}")
     Call<User> getUser(@Path("id") String id);
 
+    @GET("auth/walkers")
+    Call <List<User>> getWalkers();
+
     @GET("dogs")
     Call <List<Dog>> getDogs();
 

@@ -49,7 +49,6 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     }
 
     public void setOnClickListener(View.OnClickListener listener){
-
         this.listener = listener;
     }
 

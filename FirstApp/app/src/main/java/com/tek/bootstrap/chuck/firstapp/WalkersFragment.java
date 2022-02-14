@@ -1,27 +1,32 @@
-package com.tek.bootstrap.chuck.firstapp.bottomNavFragments;
+package com.tek.bootstrap.chuck.firstapp;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.tek.bootstrap.chuck.firstapp.R;
-import com.tek.bootstrap.chuck.firstapp.WalkersFragment;
+import com.tek.bootstrap.chuck.firstapp.ui.model.Dog;
+import com.tek.bootstrap.chuck.firstapp.ui.model.User;
+import com.tek.bootstrap.chuck.firstapp.ui.viewModel.DogViewModel;
+import com.tek.bootstrap.chuck.firstapp.ui.viewModel.UserViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link WalkersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
-    LinearLayout lostAnimals, walkers;
+public class WalkersFragment extends Fragment {
+
+    UserViewModel userViewModel;
+    List<User>  walkerList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +37,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomeFragment() {
+    public WalkersFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +47,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment WalkersFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static WalkersFragment newInstance(String param1, String param2) {
+        WalkersFragment fragment = new WalkersFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,34 +66,25 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.getWalkers();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_walkers, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-      lostAnimals = view.findViewById(R.id.layoutGoal);
-      walkers = view.findViewById(R.id.layoutWalkers);
-
-        lostAnimals.setOnClickListener(new View.OnClickListener() {
+        userViewModel.users.observe(getViewLifecycleOwner(), new Observer<List<User>>() {
             @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new LostAnimalsFragment()).commit();
+            public void onChanged(List<User> users) {
+                walkerList = userViewModel.users.getValue();
+                Log.d("devErrors", "walkers are: " + walkerList);
+
             }
         });
 
-        walkers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new WalkersFragment()).commit();
-            }
-        });
+        return view;
     }
 }

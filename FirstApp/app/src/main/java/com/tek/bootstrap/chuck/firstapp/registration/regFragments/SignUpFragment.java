@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class SignUpFragment extends Fragment {
     ProgressBar progressBar;
     TextView DisplayText;
     TextView display;
+    CheckBox walker;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -105,15 +107,20 @@ public class SignUpFragment extends Fragment {
         textViewLogin = getView().findViewById(R.id.loginText);
         progressBar = getView().findViewById(R.id.progress);
         display = getView().findViewById(R.id.displayAlert);
+        walker = getView().findViewById(R.id.checkbox_true);
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name, username, password, email;
+                Boolean isWalker;
                 name = String.valueOf(textInputEditTextName.getText());
                 username = String.valueOf(textInputEditTextUsername.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
+                isWalker = walker.isChecked();
+                Log.d("devErrors", "is walker = " + isWalker);
+                String walkerString = Boolean.toString(isWalker);
 
                 if(name.matches("") || username.matches("") || email.matches("") || password.matches("")){
                     display.setText("Please fill in all the information");
@@ -124,6 +131,7 @@ public class SignUpFragment extends Fragment {
                     params.put("username", username);
                     params.put("email", email);
                     params.put("password", password);
+                    params.put("walker", walkerString);
                     JsonObjectRequest jsObjRequest = new
                             JsonObjectRequest(Request.Method.POST,
                             url,
