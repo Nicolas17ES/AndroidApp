@@ -24,8 +24,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
+import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
 import com.tek.bootstrap.chuck.firstapp.MainActivity;
 import com.tek.bootstrap.chuck.firstapp.R;
+import com.tek.bootstrap.chuck.firstapp.UploadImageUser;
+import com.tek.bootstrap.chuck.firstapp.Upload_image;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,13 +42,13 @@ import java.util.HashMap;
  * create an instance of this fragment.
  */
 public class SignUpFragment extends Fragment {
-    TextInputEditText textInputEditTextName, textInputEditTextUsername, textInputEditTextPassword, textInputEditTextEmail;
+    TextInputEditText textInputEditTextName, textInputEditTextUsername, textInputEditTextPassword, textInputEditTextEmail, textInputEditTextCity, textInputEditTextCountry;
     Button buttonSignUp;
     TextView textViewLogin;
     ProgressBar progressBar;
     TextView DisplayText;
-    TextView display;
-    CheckBox walker;
+    TextView display, infoPublic;
+    CheckBox walker, publicProfile;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -97,32 +101,101 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        final String url = "http://192.168.1.98:3001/auth/register";
+        final String url = "http://192.168.1.35:3001/auth/register";
 
         textInputEditTextName = getView().findViewById(R.id.fullname);
         textInputEditTextUsername = getView().findViewById(R.id.username);
         textInputEditTextEmail = getView().findViewById(R.id.email);
         textInputEditTextPassword = getView().findViewById(R.id.password);
+        textInputEditTextCity = getView().findViewById(R.id.city);
+        textInputEditTextCountry = getView().findViewById(R.id.country);
+        walker = getView().findViewById(R.id.checkbox_true);
+        publicProfile = getView().findViewById(R.id.checkbox_public);
         buttonSignUp = getView().findViewById(R.id.buttonSignUp);
         textViewLogin = getView().findViewById(R.id.loginText);
         progressBar = getView().findViewById(R.id.progress);
         display = getView().findViewById(R.id.displayAlert);
-        walker = getView().findViewById(R.id.checkbox_true);
+
+        publicProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FancyGifDialog.Builder(getActivity())
+                        .setTitle("This will allow you to connect with other users by sending and receiving friend requests. Share information on lost animals or receive information from other users if your animal gets lost. ** Find more information on your profile settings **") // You can also send title like R.string.from_resources
+                        .setMessage("** Only username and city location will be shared with other users.")
+                        .setTitleTextColor(R.color.greenSplash)
+                        .setDescriptionTextColor(R.color.green)
+                        .setNegativeBtnText("Cancel") // or pass it like android.R.string.cancel
+                        .setPositiveBtnBackground(R.color.beige)
+                        .setPositiveBtnText("Ok") // or pass it like android.R.string.ok
+                        .setNegativeBtnBackground(R.color.beige)
+                        .setGifResource(R.drawable.ic_users_friends_svgrepo_com)   //Pass your Gif here
+                        .isCancellable(true)
+                        .OnPositiveClicked(new FancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                            }
+                        })
+                        .OnNegativeClicked(new FancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                              if(publicProfile.isChecked()){
+                                  publicProfile.setChecked(false);
+                              }
+                            }
+                        }).build();
+            }
+        });
+
+        walker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FancyGifDialog.Builder(getActivity())
+                        .setTitle("Walker profile will allow other users to contact you whenever they need a Dog Walker service.")
+                        .setMessage("**Only your username, rating and city location will be shared with other users.")
+                        .setTitleTextColor(R.color.greenSplash)
+                        .setDescriptionTextColor(R.color.green)
+                        .setNegativeBtnText("Cancel") // or pass it like android.R.string.cancel
+                        .setPositiveBtnBackground(R.color.beige)
+                        .setPositiveBtnText("Ok") // or pass it like android.R.string.ok
+                        .setNegativeBtnBackground(R.color.beige)
+                        .setGifResource(R.drawable.ic_dog_in_front_of_a_man_svgrepo_com)   //Pass your Gif here
+                        .isCancellable(true)
+                        .OnPositiveClicked(new FancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+
+                            }
+                        })
+                        .OnNegativeClicked(new FancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                if(walker.isChecked()){
+                                    walker.setChecked(false);
+                                }
+                            }
+                        }).build();
+            }
+        });
+
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name, username, password, email;
-                Boolean isWalker;
+                String name, username, password, email, city, country;
+                Boolean isWalker, isPublic;
                 name = String.valueOf(textInputEditTextName.getText());
                 username = String.valueOf(textInputEditTextUsername.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
+                city = String.valueOf(textInputEditTextCity.getText());
+                country = String.valueOf(textInputEditTextCountry.getText());
                 isWalker = walker.isChecked();
+                isPublic = publicProfile.isChecked();
                 Log.d("devErrors", "is walker = " + isWalker);
                 String walkerString = Boolean.toString(isWalker);
+                String publicString = Boolean.toString(isPublic);
 
-                if(name.matches("") || username.matches("") || email.matches("") || password.matches("")){
+                if(name.matches("") || username.matches("") || email.matches("") || password.matches("") || city.matches("") || country.matches("")){
                     display.setText("Please fill in all the information");
                 } else {
                     HashMap<String, String> params = new HashMap<String,String>();
@@ -131,7 +204,11 @@ public class SignUpFragment extends Fragment {
                     params.put("username", username);
                     params.put("email", email);
                     params.put("password", password);
+                    params.put("city", city);
+                    params.put("country", country);
                     params.put("walker", walkerString);
+                    params.put("publicProfile", publicString);
+
                     JsonObjectRequest jsObjRequest = new
                             JsonObjectRequest(Request.Method.POST,
                             url,
@@ -142,14 +219,10 @@ public class SignUpFragment extends Fragment {
                                     String id = null;
                                     try {
                                         id = response.getString("user_id");
-                                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                                        Intent intent = new Intent(getActivity(), UploadImageUser.class);
+                                        intent.putExtra("email", email);
                                         intent.putExtra("user_id", id);
                                         startActivity(intent);
-                                        Toast toast = Toast.makeText(getActivity(),"Succesfully registered",Toast. LENGTH_SHORT);
-                                        toast.setMargin(50,50);
-                                        toast.show();
-
-
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -174,7 +247,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
                 fragmentTransaction.replace(R.id.fragmentContainer, new LoginFragment());
                 fragmentTransaction.commit();
             }

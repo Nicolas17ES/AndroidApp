@@ -32,7 +32,7 @@ public class Dog {
        // this.image = image;
         this.user_id = user_id;
     }
-    public Dog(){}
+
 
     public int getId() { return id; }
 

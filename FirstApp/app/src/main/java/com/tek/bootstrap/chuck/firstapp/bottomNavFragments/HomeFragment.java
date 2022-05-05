@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.tek.bootstrap.chuck.firstapp.ConnectFragment;
 import com.tek.bootstrap.chuck.firstapp.R;
 import com.tek.bootstrap.chuck.firstapp.WalkersFragment;
 
@@ -21,7 +22,7 @@ import com.tek.bootstrap.chuck.firstapp.WalkersFragment;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    LinearLayout lostAnimals, walkers;
+    LinearLayout lostAnimals, walkers, users;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,18 +77,26 @@ public class HomeFragment extends Fragment {
 
       lostAnimals = view.findViewById(R.id.layoutGoal);
       walkers = view.findViewById(R.id.layoutWalkers);
+      users = view.findViewById(R.id.layoutConnect);
 
         lostAnimals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new LostAnimalsFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new LostAnimalsFragment()).commit();
             }
         });
 
         walkers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new WalkersFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new WalkersFragment()).commit();
+            }
+        });
+
+        users.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new ConnectFragment()).commit();
             }
         });
     }

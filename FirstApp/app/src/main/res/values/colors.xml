@@ -9,7 +9,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="blue">#FE6865</color>
+    <color name="redish">#FA9694</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#DDDADA</color>
+    <color name="red">#ED4141</color>
+    <color name="accept">#8BC34A</color>
 </resources>

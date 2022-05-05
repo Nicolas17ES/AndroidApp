@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2, TimeUnit.SECONDS);
+        }, 1, TimeUnit.SECONDS);
     }
 
 

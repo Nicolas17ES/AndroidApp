@@ -24,6 +24,18 @@ public interface UserApi {
     @GET("auth/walkers")
     Call <List<User>> getWalkers();
 
+    @GET("auth/public/{id}")
+    Call <List<User>> getUsers(@Path("id") String id);
+
+    @GET("friends/received/{id}")
+    Call<List<User>> getUserFromRequest(@Path("id") String id);
+
+    @GET("friends/show/{id}")
+    Call<List<User>> getFriends(@Path("id") String id);
+
+    @POST("friends/accept")
+    Call<User> acceptRequestFromUser(@Body User user);
+
     @GET("dogs")
     Call <List<Dog>> getDogs();
 
@@ -36,4 +48,8 @@ public interface UserApi {
     @Multipart
     @POST("image")
     Call<FileModel> postImage(@Part MultipartBody.Part image, @Query("name") String name, @Query("email") String email, @Query("user_id") String user_id);
+
+    @Multipart
+    @POST("image/user")
+    Call<FileModel> postImageUser(@Part MultipartBody.Part image, @Query("email") String email, @Query("user_id") String user_id);
 }

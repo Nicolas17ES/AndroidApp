@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.tek.bootstrap.chuck.firstapp.bottomNavFragments.MapsActivity;
 import com.tek.bootstrap.chuck.firstapp.R;
+import com.tek.bootstrap.chuck.firstapp.ui.model.User;
+import com.tek.bootstrap.chuck.firstapp.ui.viewModel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +30,8 @@ import com.tek.bootstrap.chuck.firstapp.R;
  */
 public class FullAnimalFragment extends Fragment {;
 
-
+    UserViewModel userViewModel;
+    User user_data;
     int id;
     String name;
     String description;
@@ -41,6 +46,8 @@ public class FullAnimalFragment extends Fragment {;
     int user_id;
     String street;
     String image;
+    String user_email;
+    String user_name;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -95,8 +102,6 @@ public class FullAnimalFragment extends Fragment {;
         user_id = (int) args.get("user_id");
         street = (String) args.get("street");
         image = (String) args.get("image");
-
-
     }
 
     @Override
@@ -111,32 +116,44 @@ public class FullAnimalFragment extends Fragment {;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        //get user data//
+        String id = String.valueOf(user_id);
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.getUser(id);
+        userViewModel.user.observe(getActivity(), new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                user_data = userViewModel.user.getValue();
+                user_email = user_data.getEmail();
+                user_name = user_data.getName();
+                Log.d("devErrors", "mail is:" + user_data.getEmail());
+            }
+        });
+
 
         //set animal data//
 
         TextView name1 = getView().findViewById(R.id.animalName);
         name1.setText(name);
-        //TextView type1 = (TextView) getView().findViewById(R.id.animalType);
-        //        type1.setText(type);
         TextView breed1 = (TextView) getView().findViewById(R.id.animalBreed);
         breed1.setText(breed);
         TextView description1 = (TextView) getView().findViewById(R.id.animalDescription);
         description1.setText(description);
-        //TextView email1 = (TextView) getView().findViewById(R.id.animalEmailText);
-        //        email1.setText(email);
+        TextView email1 = (TextView) getView().findViewById(R.id.animalEmailText);
+        ImageView email2 = (ImageView) getView().findViewById(R.id.emailIcon);
         TextView city1 = (TextView) getView().findViewById(R.id.animalCity);
         city1.setText(city);
         TextView date1 = (TextView) getView().findViewById(R.id.animalDate);
         date1.setText(date);
         ImageView image1 = (ImageView) getView().findViewById(R.id.animalImage);
-        String url = "http://192.168.1.98:3001/images/upload_images/" + image;
+        String url = "http://192.168.1.35:3001/images/upload_images/" + image;
         Picasso.get().load(url).placeholder(R.drawable.ic_dog).into(image1);
 
         TextView street1 = (TextView) getView().findViewById(R.id.animalStreet);
         street1.setText(street);
 
         //redirect to maps//
-        ImageView icon = (ImageView) getView().findViewById(R.id.locationIcon);
+       // ImageView icon = (ImageView) getView().findViewById(R.id.locationIcon);
         TextView mapsText = (TextView) getView().findViewById(R.id.locationText);
 
         mapsText.setOnClickListener(new View.OnClickListener() {
@@ -151,5 +168,30 @@ public class FullAnimalFragment extends Fragment {;
 
             }
         });
+
+        email1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendEmail();
+
+            }
+        });
+
+        email2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendEmail();
+
+            }
+        });
+    }
+
+    public void sendEmail(){
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ user_email});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Your lost dog");
+        email.setType("message/rfc822");
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+
     }
 }

@@ -148,7 +148,7 @@ public class LostAnimalsFragment extends Fragment {
 
                 FullAnimalFragment fullAnimalFragment = new FullAnimalFragment();
                 fullAnimalFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fullAnimalFragment).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container, fullAnimalFragment).addToBackStack(null).commit();
             }
         });
 

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/beige"
+    android:layout_gravity="center"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/walkerImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_users_friends_svgrepo_com" />
+
+        <TextView
+            android:id="@+id/request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toEndOf="@id/walkerImage"
+            android:layout_toRightOf="@+id/walkerImage"
+            android:text="Friend request from "
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/requestName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/request"
+            android:layout_toRightOf="@+id/request"
+            android:text="Johny"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/reject"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/request"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/walkerImage"
+            android:layout_toRightOf="@+id/walkerImage"
+            android:backgroundTint="@color/red"
+            android:text="Reject"
+            android:textSize="7sp" />
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:text="Accept"
+            android:textSize="7sp"
+            android:layout_below="@+id/request"
+            android:backgroundTint="@color/accept"
+            android:layout_toEndOf="@id/reject"
+            android:layout_toRightOf="@+id/reject"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            />
+
+
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

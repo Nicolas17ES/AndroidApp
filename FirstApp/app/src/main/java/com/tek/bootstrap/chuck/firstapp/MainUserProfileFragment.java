@@ -21,7 +21,7 @@ import com.tek.bootstrap.chuck.firstapp.bottomNavFragments.UserProfileFragment;
  */
 public class MainUserProfileFragment extends Fragment {
 
-    LinearLayout yourAnimals;
+    LinearLayout yourAnimals, yourSettings, yourFriends;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,11 +74,27 @@ public class MainUserProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         yourAnimals = view.findViewById(R.id.yourAnimals);
+        yourSettings = view.findViewById(R.id.layoutSettings);
+        yourFriends = view.findViewById(R.id.layoutFriends);
 
         yourAnimals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new UserProfileFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new UserProfileFragment()).commit();
+            }
+        });
+
+        yourSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new SettingsFragment()).commit();
+            }
+        });
+
+        yourFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container , new FriendsFragment()).commit();
             }
         });
     }

@@ -169,7 +169,7 @@ public class Upload_image extends AppCompatActivity {
 
 
             Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.98:3001/")
+                .baseUrl("http://192.168.1.35:3001/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
             UserApi userApi = retrofit.create(UserApi.class);

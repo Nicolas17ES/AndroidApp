@@ -68,6 +68,9 @@ dependencies {
     //picass
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //fancy dialog
+    implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.4'
+
 
 
 }

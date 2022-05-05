@@ -21,8 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/green"
-        app:strokeWidth="1dp"
         app:cardBackgroundColor="@color/beige">
 
         <RelativeLayout
@@ -57,7 +55,7 @@
                 android:layout_toRightOf="@id/locationIcon"
                 android:text="Maps Location"
                 android:textSize="10sp"
-                android:textColor="@color/greenHard"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/animalName"
@@ -68,7 +66,7 @@
                 android:layout_toEndOf="@id/animalImage"
                 android:layout_toRightOf="@+id/animalImage"
                 android:text="Johny"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="17sp"
                 />
 
@@ -80,7 +78,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_toEndOf="@id/animalImage"
                 android:text="Breed:"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
 
@@ -94,7 +92,7 @@
                 android:layout_toEndOf="@id/animalType"
                 android:layout_toRightOf="@id/animalType"
                 android:text="Chihuaha"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
             <TextView
@@ -106,7 +104,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="15dp"
                 android:text="Lost on: "
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="10sp"/>
 
             <TextView
@@ -117,7 +115,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_toEndOf="@id/animalImage"
                 android:text="Barcelona"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="10sp" />
 
             <TextView
@@ -128,7 +126,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_toRightOf="@id/animalImage"
                 android:text="Major de Sarria"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="10sp" />
 
             <TextView
@@ -139,7 +137,7 @@
                 android:layout_marginStart="35dp"
                 android:layout_toRightOf="@id/animalImage"
                 android:text="12Th february 2021"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="10sp" />
 
             <TextView
@@ -148,18 +146,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/animalDate"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="21dp"
                 android:layout_toRightOf="@id/locationText"
-                android:text="Contact for more info"
-                android:textColor="@color/greenHard"
+                android:text="Contact"
+                android:textColor="@color/black"
                 android:textSize="10sp" />
 
             <ImageView
+                android:id="@+id/emailIcon"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_below="@+id/animalDate"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="21dp"
                 android:layout_toRightOf="@id/animalEmailText"
                 android:src="@drawable/ic_mail" />
 
@@ -172,7 +171,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_toEndOf="@id/animalImage"
                 android:text="Description: "
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
             <TextView
@@ -184,7 +183,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_toEndOf="@id/animalImage"
                 android:text="Very peacuful dog with blue eyes"
-                android:textColor="@color/greenHard"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
 

@@ -94,7 +94,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        final String url = "http://192.168.1.98:3001/auth/login";
+        final String url = "http://192.168.1.35:3001/auth/login";
 
         textInputEditTextEmail = getView().findViewById(R.id.email);
         textInputEditTextPassword = getView().findViewById(R.id.password);
@@ -155,7 +155,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
                 fragmentTransaction.replace(R.id.fragmentContainer, new SignUpFragment());
                 fragmentTransaction.commit();
             }

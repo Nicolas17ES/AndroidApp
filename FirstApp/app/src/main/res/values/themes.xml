@@ -23,4 +23,9 @@
 
     <style name="Theme.FirstApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/beige</item>
+
+    </style>
+
 </resources>

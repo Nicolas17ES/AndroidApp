@@ -10,7 +10,7 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/editProfile"
+        android:id="@+id/editProfileNotis"
         android:title="Edit Profile"
         />
     <item

@@ -11,6 +11,24 @@
     android:layout_marginBottom="81dp"
     android:layout_marginTop="80dp"
     >
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="@color/greenSplash"
+            android:textSize="30sp"
+            android:text="Nicolas"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,6 +39,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
             >
             <LinearLayout
                 android:id="@+id/yourAnimals"
@@ -59,7 +78,6 @@
                 android:id="@+id/layoutFriends"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:layout_margin="20dp"
                 android:background="@drawable/background"
                 android:gravity="center"

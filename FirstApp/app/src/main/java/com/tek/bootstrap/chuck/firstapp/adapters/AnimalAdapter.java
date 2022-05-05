@@ -61,11 +61,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
         String date = model.get(position).getDate();
         id = model.get(position).getId();
         String image = model.get(position).getImage();
-        String url = "http://192.168.1.98:3001/images/upload_images/" + image;
-        Log.d("devErrors", "image is " +url);
-
-
-
+        String url = "http://192.168.1.35:3001/images/upload_images/" + image;
 
         //set in view
         holder.names.setText(name);
@@ -85,11 +81,6 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
         });
         Log.d("devErrors", "image is " +url);
         Picasso.get().setLoggingEnabled(true);
-
-        // holder.images.setImageResource(foto);
-       // Picasso.get().load(url).into(holder.images);
-
-
     }
 
     @Override

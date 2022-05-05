@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tek.bootstrap.chuck.firstapp.MainActivity;
@@ -43,6 +46,7 @@ public class UserProfileFragment extends Fragment {
     int id;
     String idToChange;
     SharedPreferences preferences;
+    TextView emptyAnimals;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -83,10 +87,15 @@ public class UserProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Bundle bundle = this.getArguments();
 
+        if(bundle != null){
+            idToChange = bundle.getString("id");
+        } else {
+            preferences = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            idToChange = preferences.getString("user_id", "null");
+        }
 
-        preferences = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        idToChange = preferences.getString("user_id", "null");
 
         if(idToChange != "null"){
             id = Integer.parseInt(idToChange);
@@ -118,11 +127,10 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onChanged(List<Dog> dogs) {
                 dogsList = dogViewModel.userDogs.getValue();
-
-               // for (Dog animal: dogsList){
-                //                    listAnimals.add(new Dog(animal.getName(), animal.getDescription(), animal.getType(), animal.getBreed(), animal.getCity(), animal.getStreet(), animal.getContactEmail(), animal.getContactPhone(), animal.getDate(), animal.getImage(), animal.getUser_id()));
-                //
-                //                }
+                emptyAnimals = getView().findViewById(R.id.emptyAnimals);
+                if (dogsList.size() == 0){
+                    emptyAnimals.setText("No Animals");
+                }
                 displayData();
             }
         });
@@ -133,46 +141,50 @@ public class UserProfileFragment extends Fragment {
         animalAdapter = new AnimalAdapter(getContext(), (ArrayList<Dog>) dogsList);
         recyclerViewAnimals.setAdapter(animalAdapter);
 
-       // animalAdapter.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                int id = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getId();
-        //                String name = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getName();
-        //                String type = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getType();
-        //                String breed = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getBreed();
-        //                String description = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getDescription();
-        //                Double lat = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getLat();
-        //                Double lng = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getLng();
-        //                String email = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactEmail();
-        //                int phone = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactPhone();
-        //                String city = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getCity();
-        //                String image = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getImage();
-        //                int user_id = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getUser_id();
-        //                String street = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getStreet();
-        //
-        //
-        //                Bundle bundle = new Bundle();
-        //                bundle.putInt( "id", id);
-        //                bundle.putString("name", name);
-        //                bundle.putString( "type", type);
-        //                bundle.putString( "breed", breed);
-        //                bundle.putString( "description", description);
-        //                bundle.putDouble( "lat", lat);
-        //                bundle.putDouble( "lng", lng);
-        //                bundle.putString( "email", email);
-        //                bundle.putInt( "phone", phone);
-        //                bundle.putString( "city", city);
-        //                bundle.putString( "image", image);
-        //                bundle.putInt( "user_id", user_id);
-        //                bundle.putString( "street", street);
-        //
-        //                FullAnimalFragment fullAnimalFragment = new FullAnimalFragment();
-        //                fullAnimalFragment.setArguments(bundle);
-        //                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fullAnimalFragment).addToBackStack(null).commit();
-        //            }
-        //        });
+        animalAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getId();
+                String name = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getName();
+                String type = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getType();
+                String breed = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getBreed();
+                String description = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getDescription();
+                Double lat = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getLat();
+                Double lng = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getLng();
+                String email = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactEmail();
+                int phone = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getContactPhone();
+                String city = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getCity();
+                String image = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getImage();
+                int user_id = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getUser_id();
+                String street = dogsList.get(recyclerViewAnimals.getChildAdapterPosition(view)).getStreet();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putInt( "id", id);
+                bundle.putString("name", name);
+                bundle.putString( "type", type);
+                bundle.putString( "breed", breed);
+                bundle.putString( "description", description);
+                bundle.putDouble( "lat", lat);
+                bundle.putDouble( "lng", lng);
+                bundle.putString( "email", email);
+                bundle.putInt( "phone", phone);
+                bundle.putString( "city", city);
+                bundle.putString( "image", image);
+                bundle.putInt( "user_id", user_id);
+                bundle.putString( "street", street);
+
+                FullAnimalFragment fullAnimalFragment = new FullAnimalFragment();
+                fullAnimalFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fullAnimalFragment).addToBackStack(null).commit();
+            }
+        });
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+    }
 }
